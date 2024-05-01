@@ -1,4 +1,7 @@
  date | time | Description | Vendor  | Amount
+2023-03-30 | 14:10:46 | paycheck | walgreens | 6000.9
+2024-03-30 | 14:10:46 | paycheck | walgreens | 6000.9
+2024-04-14 | 14:10:46 | paycheck | walgreens | 60.9
 2024-04-30 | 14:10:46 | paycheck | walgreens | 6000.9
 2024-04-30 | 14:12:59 | paycheck | walgreens | 780.9
 2024-04-30 | 14:12:59 | paycheck | walgreens | 780.9
@@ -16,8 +19,13 @@
 2024-04-30 | 15:18:55 | paycheck | amazon | 8089.9
 2024-04-30 | 15:18:55 | paycheck | amazon | 8089.9
 2024-04-30 | 15:19:16 | online shoping | CeraVe | -80.0
-2024-04-30 | 15:20:03 | snacks | liqure store | -70.0
-2024-04-30 | 15:20:03 | snacks | liqure store | -70.0
+2024-04-30 | 15:20:03 | snacks | liquor store | -70.0
+2024-04-30 | 15:20:03 | snacks | liquor store  | -70.0
 2024-04-30 | 15:20:17 | paycheck | wagreens | 750.9
 2024-05-30 | 15:20:17 | paheck | wagreens | 750.9
-
+2024-05-01 | 24:06:32 | paycheck | walmart | 300.0
+2024-05-01 | 24:06:32 | paycheck | walmart | 300.0
+2024-05-01 | 24:06:50 | home supplies | home depot | -569.7
+2024-05-01 | 24:13:10 | savings | jackie | 200.0
+2024-05-01 | 10:52:25 | paycheck | Amazon | 500.0
+2024-05-01 | 13:14:08 | paycheck | Best buy | 3000.0

@@ -1,18 +1,18 @@
 package com.pluralsight;
 import java.io.*;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
+import java.util.Collections;
 
 public class Main
 
 {
-    private static ArrayList<AccountingLedger> depositPayment = new ArrayList<>();
-    private static ArrayList<AccountingLedger> pastDepositPayment = new ArrayList<>();
+    private static ArrayList<AccountingLedger> transactions = new ArrayList<>();
     private static Scanner userInput = new Scanner(System.in);
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_DATE;
@@ -47,7 +47,7 @@ public class Main
 
                 switch (userChoice) {
                     case "d":
-                        addDeposit();
+                        makeDeposit();
                         break;
                     case "p":
                         makePayment();
@@ -68,6 +68,47 @@ public class Main
         } catch (InputMismatchException ex) {
             System.out.println("Not a valid input Entered ");
         }
+
+    }
+
+    private static void makeDeposit()
+    {
+        System.out.println();
+        System.out.println(("-").repeat(50));
+        System.out.println();
+        System.out.println("Enter the following information");
+        System.out.println();
+
+        try {
+
+            System.out.println("Enter the amount to deposit");
+            double depositAmount = Double.parseDouble(userInput.nextLine().strip());
+            System.out.println();
+
+            System.out.println("Enter the Source where the fund are coming (e.g. paycheck, savings, gift)");
+            String depositDescription = userInput.nextLine();
+            System.out.println();
+
+            System.out.println("Enter the name of the vendor to who is paying you.");
+            String vendorDeposit = userInput.nextLine();
+            System.out.println(("-").repeat(50));
+            System.out.println();
+
+            LocalDate date = LocalDate.now();
+            LocalTime time =  LocalTime.now();
+
+            AccountingLedger information = new AccountingLedger(date, time, depositDescription,vendorDeposit,depositAmount);
+            transactions.add(information);
+
+            writeToFile();
+
+
+        } catch (NumberFormatException ex) {
+            System.out.println("Invalid input only type in the number");
+            makeDeposit();
+        }
+
+        promptDepositChoice();
 
     }
 
@@ -97,7 +138,7 @@ public class Main
             LocalTime time =  LocalTime.now();
 
             AccountingLedger information = new AccountingLedger(date,time , paymentDescription,vendorPayment, paymentAmount);
-            depositPayment.add(information);
+            transactions.add(information);
 
             writeToFile();
 
@@ -131,45 +172,6 @@ public class Main
         }
     }
 
-    private static void addDeposit() {
-        System.out.println();
-        System.out.println(("-").repeat(50));
-        System.out.println();
-        System.out.println("Enter the following information");
-        System.out.println();
-
-        try {
-
-            System.out.println("Enter the amount to deposit");
-            double amountDeposit = Double.parseDouble(userInput.nextLine().strip());
-            System.out.println();
-
-            System.out.println("Enter the Source where the fund are coming (e.g. paycheck, savings, gift)");
-            String depositDescription = userInput.nextLine();
-            System.out.println();
-
-            System.out.println("Enter the name of the vendor to who is paying you.");
-            String vendorDeposit = userInput.nextLine();
-            System.out.println(("-").repeat(50));
-            System.out.println();
-
-            LocalDate date = LocalDate.now();
-            LocalTime time =  LocalTime.now();
-
-            AccountingLedger information = new AccountingLedger(date, time, depositDescription,vendorDeposit,amountDeposit);
-            depositPayment.add(information);
-
-            writeToFile();
-
-
-        } catch (NumberFormatException ex) {
-            System.out.println("Invalid input only type in the number");
-            addDeposit();
-        }
-
-        promptDepositChoice();
-
-    }
 
     public static void promptDepositChoice()
     {
@@ -183,7 +185,7 @@ public class Main
         switch(choice)
         {
             case "i":
-                addDeposit();
+                makeDeposit();
                 promptDepositChoice();
                 break;
             case "x":
@@ -211,11 +213,11 @@ public class Main
                 writer.write(" date | time | Description | Vendor  | Amount \n");
             }
 
-            for (AccountingLedger amount : depositPayment )
+            for (AccountingLedger transaction : transactions )
             {
-                writer.write(amount.getDate().format(DATE_FORMAT) + " | " + amount.getTime().format(TIME_FORMAT) +" | " + amount.getDescription() + " | " +
-                        amount.getVendor() + " | " +
-                        amount.getAmount() + "\n");
+                writer.write(transaction.getDate().format(DATE_FORMAT) + " | " + transaction.getTime().format(TIME_FORMAT) +" | " + transaction.getDescription() + " | " +
+                        transaction.getVendor() + " | " +
+                        transaction.getAmount() + "\n");
             }
 
 
@@ -249,7 +251,7 @@ public class Main
                 LocalTime timeTransaction = LocalTime.parse(time, TIME_FORMAT);
 
                 AccountingLedger information = new AccountingLedger(dateTransaction , timeTransaction , description, vendor, amount);
-                pastDepositPayment.add(information);
+                transactions.add(information);
 
             }
         } catch (IOException ex)
@@ -305,80 +307,58 @@ public class Main
 
     }
 
+    public static void reverseTransaction(ArrayList<AccountingLedger> transactions)
+    {
+        Collections.reverse(transactions);
+    }
+
     private static void allEntries()
     {
-
-
         System.out.println("All Transactions");
         System.out.println();
 
-        for (AccountingLedger amount : depositPayment )
+        reverseTransaction(transactions);
+
+        for (AccountingLedger transaction : transactions)
         {
-            System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n" ,amount.getDate(), amount.getTime(), amount.getDescription(), amount.getVendor(), amount.getAmount());
+            System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+
         }
-        pastEntries();
         userChoice();
 
     }
-
-    private static void pastEntries()
-    {
-
-        for (AccountingLedger transactions : pastDepositPayment)
-        {
-            System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n" , transactions.getDate(), transactions.getTime(), transactions.getDescription(), transactions.getVendor(), transactions.getAmount());
-        }
-
-    }
-
 
     private static void depositEntries()
     {
-        System.out.println("Deposit: ");
+        System.out.println("ALL Deposit Entries: ");
         System.out.println();
-        for (AccountingLedger amount : depositPayment )
+
+        reverseTransaction(transactions);
+
+        for (AccountingLedger transaction : transactions)
         {
-            if (amount.getAmount() > 0)
+            if (transaction.getAmount() > 0)
             {
 
-                System.out.printf("%-13tF %-15.2f \n",amount.getDate(), amount.getAmount());
-            }
-
-        }
-
-        for (AccountingLedger transactions : pastDepositPayment)
-        {
-            if (transactions.getAmount() > 0)
-            {
-
-                System.out.printf("%-13tF %-15.2f\n", transactions.getDate(), transactions.getAmount());
+                System.out.printf("%-13tF %-15.2f \n", transaction.getDate(), transaction.getAmount());
             }
         }
+
         userChoice();
-
     }
 
     private static void paymentEntries()
     {
-        System.out.println("Payments: ");
+        System.out.println("ALL Payments Entries: ");
 
+        reverseTransaction(transactions);
 
-        for (AccountingLedger amount : depositPayment )
+        for (AccountingLedger transaction : transactions)
         {
-            if (amount.getAmount() < 0)
+            if (transaction.getAmount() < 0)
             {
 
-                System.out.printf("%-13tF %-15.2f \n" ,amount.getDate(), amount.getAmount());
-            }
-
-        }
-
-        for (AccountingLedger transactions : pastDepositPayment)
-        {
-            if (transactions.getAmount() < 0)
-            {
-
-                System.out.printf("%-13tF %-15.2f \n", transactions.getDate(), transactions.getAmount());
+                System.out.printf("%-13tF %-15.2f \n", transaction.getDate(), transaction.getAmount());
             }
         }
         userChoice();
@@ -427,7 +407,7 @@ public class Main
         System.out.println(("-").repeat(50));
 
 
-        while (true)
+        while(true)
         {
             int userChoice = Integer.parseInt(userInput.nextLine());
 
@@ -437,13 +417,13 @@ public class Main
                     monthToDate();
                     break;
                 case 2:
-                    //previousMonth();
+                    previousMonth();
                     break;
                 case 3:
-                   // yearToDate();
+                   yearToDate();
                     break;
                 case 4:
-                   // previousYear();
+                    previousYear();
                     break;
                 case 5:
                    // searchByVendor();
@@ -462,37 +442,106 @@ public class Main
 
     }
 
+
+    private static void previousYear() {
+        LocalDate date = LocalDate.now();
+        System.out.println("Transactions made previous Year");
+
+        LocalDate previousYear = LocalDate.of(date.minusYears(1).getYear(), 1, 1);
+        YearMonth previousYearLastMonth = YearMonth.of(date.minusYears(1).getYear(),  12);
+        LocalDate lastDayOfMonth = previousYearLastMonth.atEndOfMonth();
+        System.out.println(previousYear + " - " + lastDayOfMonth);
+        System.out.println();
+
+        reverseTransaction(transactions);
+
+        for (AccountingLedger transaction : transactions)
+        {
+            if (!transaction.getDate().isBefore(previousYear) && !transaction.getDate().isAfter(lastDayOfMonth))
+            {
+
+                System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+
+
+        }
+    }
+
+
+    private static void yearToDate()
+    {
+        LocalDate date = LocalDate.now();
+        System.out.println("Transactions made Year to today");
+
+        LocalDate year = LocalDate.of(date.getYear(), 1, 1);
+
+        System.out.println(year + " - " + date);
+        System.out.println();
+
+        reverseTransaction(transactions);
+
+        for (AccountingLedger transaction : transactions)
+        {
+            if (!transaction.getDate().isBefore(year) && !transaction.getDate().isAfter(date))
+            {
+
+                System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+
+
+        }
+
+    }
+
+    private static void previousMonth()
+    {
+        LocalDate date = LocalDate.now();
+        System.out.println("Transactions made previous month");
+
+        LocalDate previousMonthStart = LocalDate.of( date.getYear() , date.minusMonths(1).getMonth() , 1 ) ;
+        YearMonth previousMonthEnd = YearMonth.of(date.getYear(),  date.minusMonths(1).getMonth());
+        LocalDate lastDayOfMonth = previousMonthEnd.atEndOfMonth();
+        System.out.println(previousMonthStart + " - " + lastDayOfMonth);
+        System.out.println();
+
+        reverseTransaction(transactions);
+
+        for (AccountingLedger transaction : transactions)
+        {
+            if (!transaction.getDate().isBefore(previousMonthStart) && !transaction.getDate().isAfter(lastDayOfMonth))
+            {
+
+                System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+
+
+        }
+
+    }
+
+
     private static void monthToDate()
     {
         System.out.println();
         System.out.println("Transactions made this month");
 
         LocalDate date = LocalDate.now();
-        date.getMonth();
-        date.getYear();
 
-        LocalDate start = LocalDate.of ( date.getYear() , date.getMonth() , 1 ) ;
-        LocalDate stop = LocalDate.of ( date.getYear() , date.getMonth(), date.getDayOfMonth() ) ;
-        Period period = Period.between ( start , stop ) ;
+        LocalDate start = LocalDate.of( date.getYear() , date.getMonth() , 1 ) ;
+        LocalDate stop = LocalDate.of( date.getYear() , date.getMonth(), date.getDayOfMonth() ) ;
 
-        for (AccountingLedger amount : depositPayment)
+        reverseTransaction(transactions);
+
+        for (AccountingLedger transaction : transactions)
         {
-            if (!amount.getDate().isBefore(start) && !amount.getDate().isAfter(stop))
+            if (!transaction.getDate().isBefore(start) && !transaction.getDate().isAfter(stop))
             {
-                System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n" ,amount.getDate(), amount.getTime(), amount.getDescription(), amount.getVendor(), amount.getAmount());
 
+                System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             }
+
+
         }
-
-        for (AccountingLedger pastTransactions : pastDepositPayment)
-        {
-            if (!pastTransactions.getDate().isBefore(start) && !pastTransactions.getDate().isAfter(stop))
-            {
-                System.out.printf(" %-15tF %-10tR %-20s %-25s %-20.2f \n" , pastTransactions.getDate(), pastTransactions.getTime(), pastTransactions.getDescription(), pastTransactions.getVendor(), pastTransactions.getAmount());
-
-            }
-        }
-
 
     }
 
