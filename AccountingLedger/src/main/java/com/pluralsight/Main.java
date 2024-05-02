@@ -1,4 +1,6 @@
 package com.pluralsight;
+import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,18 +19,22 @@ public class Main
 
     public static void homeScreen() {
         System.out.println();
-        System.out.println(("-").repeat(50));
+        System.out.println( Colors.YELLOW + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println("Welcome");
+        System.out.println( Colors.BLUE + "Tracking Financial Footprints" + Colors.RESET);
         System.out.println();
-        System.out.println("Menu:");
         System.out.println();
-        System.out.println("Please Select The Following:");
-        System.out.println(" [D] Would you like to deposit today?");
-        System.out.println(" [P] Would you like to make a payment today?");
-        System.out.println(" [L] Would you like to view the Ledger?");
-        System.out.println(" [X] Exit");
-        System.out.println(("-").repeat(50));
+        System.out.println();
+        System.out.println(Colors.PURPLE + "Welcome");
+        System.out.println();
+        System.out.println("Menu:" );
+        System.out.println();
+        System.out.println("Please Select The Following:" + Colors.RESET);
+        System.out.println(" [D] " + Colors.CYAN + "Would you like to deposit today?" + Colors.RESET);
+        System.out.println(" [P] " + Colors.CYAN + "Would you like to make a payment today?" + Colors.RESET);
+        System.out.println(" [L] " + Colors.CYAN + "Would you like to view the Ledger?" +  Colors.RESET );
+        System.out.println(" [X] " + Colors.CYAN + "Exit" +  Colors.RESET);
+        System.out.println(Colors.RED + ("-").repeat(50) + Colors.RESET);
 
 
         while(true)
@@ -65,9 +71,9 @@ public class Main
     private static void makeDeposit()
     {
         System.out.println();
-        System.out.println(("-").repeat(50));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println(" Enter the following information ");
+        System.out.println(Colors.PURPLE + "Enter the following information " + Colors.RESET);
         System.out.println();
 
         try {
@@ -82,7 +88,7 @@ public class Main
 
             System.out.println("Enter the name of the vendor to who is paying you.");
             String vendorDeposit = userInput.nextLine();
-            System.out.println(("-").repeat(50));
+            System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
             System.out.println();
 
             logger.logTransactions(depositDescription, vendorDeposit, depositAmount);
@@ -99,10 +105,10 @@ public class Main
     public static void promptDepositChoice()
     {
         System.out.println();
-        System.out.println("What would you like to do?");
-        System.out.println(" [I] insert another deposit");
-        System.out.println(" [X] Go to the home screen");
-        System.out.print("Select an option: ");
+        System.out.println(Colors.PURPLE + "What would you like to do?" + Colors.RESET);
+        System.out.println(" [I] " + Colors.CYAN + "insert another deposit" + Colors.RESET);
+        System.out.println(" [X] " + Colors.CYAN + "Go to the home screen" + Colors.RESET);
+        System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
         switch(choice)
@@ -123,9 +129,9 @@ public class Main
 
     private static void makePayment() {
         System.out.println();
-        System.out.println(("-").repeat(50));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println("Payment Information");
+        System.out.println(Colors.PURPLE + "Payment Information" + Colors.RESET);
         System.out.println();
 
         try {
@@ -139,7 +145,7 @@ public class Main
             System.out.println("Enter the vendor to whom you are paying. (e.g. Amazon, Discovery credit card)  ");
             String vendorPayment = userInput.nextLine();
 
-            System.out.println(("-").repeat(50));
+            System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
             System.out.println();
 
             logger.logTransactions(paymentDescription,vendorPayment, paymentAmount);
@@ -156,10 +162,10 @@ public class Main
     public static void promptPaymentChoice()
     {
         System.out.println();
-        System.out.println("What would you like to do?");
-        System.out.println(" [I] insert another payment");
-        System.out.println(" [X] Go to the home screen");
-        System.out.print("Select an option: ");
+        System.out.println( Colors.PURPLE + "What would you like to do?" + Colors.RESET);
+        System.out.println(" [I] " + Colors.CYAN + "insert another payment" + Colors.RESET);
+        System.out.println(" [X] " + Colors.CYAN + "Go to the home screen" + Colors.RESET);
+        System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
         switch(choice)
@@ -180,19 +186,19 @@ public class Main
     private static void ledger()
     {
         System.out.println();
-        System.out.println(("-").repeat(50));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println("Menu");
+        System.out.println( Colors.PURPLE + "Menu");
         System.out.println();
         System.out.println("Entries:");
         System.out.println();
-        System.out.println("Will you like to view :");
-        System.out.println(" [A] All transactions");
-        System.out.println(" [D] Deposits entries only");
-        System.out.println(" [P] Payments entries only");
-        System.out.println(" [R] Reports");
-        System.out.println(" [H] Home page");
-        System.out.println(("-").repeat(50));
+        System.out.println(  "Will you like to view :" + Colors.RESET);
+        System.out.println(" [A] " + Colors.CYAN + "All transactions" + Colors.RESET);
+        System.out.println(" [D] " + Colors.CYAN + "Deposits entries only" + Colors.RESET);
+        System.out.println(" [P] " + Colors.CYAN + "Payments entries only" + Colors.RESET);
+        System.out.println(" [R] " + Colors.CYAN + "Reports" + Colors.RESET);
+        System.out.println(" [H] " + Colors.CYAN + "Home page" + Colors.RESET);
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
 
         try{
 
@@ -241,7 +247,7 @@ public class Main
         description = "Description";
         vendor = "Vendor";
         amount = "Amount";
-        System.out.printf("%-15s %-10s %-40s %-25s %-20s",date,time,description,vendor,amount);
+        System.out.printf(Colors.PURPLE + "%-15s %-10s %-40s %-25s %-20s",date,time,description,vendor,amount + Colors.RESET);
 
 
 
@@ -250,9 +256,9 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50));
         System.out.println();
-        System.out.println("All Transactions");
+        System.out.println( "All Transactions" + Colors.RESET );
         System.out.println();
         displayHeader();
 
@@ -277,9 +283,9 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50));
         System.out.println();
-        System.out.println("ALL Deposit Entries: ");
+        System.out.println("ALL Deposit Entries: " + Colors.RESET);
         System.out.println();
         displayHeader();
 
@@ -301,9 +307,9 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50));
         System.out.println();
-        System.out.println("ALL Payments Entries: ");
+        System.out.println("ALL Payments Entries: " + Colors.RESET);
         System.out.println();
         displayHeader();
 
@@ -325,12 +331,12 @@ public class Main
     private static void userChoice()
     {
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println("What would you like to do?");
-        System.out.println(" [L] Go back to View entries ");
-        System.out.println(" [X] Go to the Home page");
-        System.out.print("Select an option: ");
+        System.out.println(Colors.PURPLE + "What would you like to do?" + Colors.RESET );
+        System.out.println(" [L] " + Colors.CYAN + "Go back to View entries" + Colors.RESET);
+        System.out.println(" [X] " + Colors.CYAN + "Go to the Home page" + Colors.RESET);
+        System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
         switch(choice)
@@ -354,17 +360,18 @@ public class Main
     private static void report()
     {
         System.out.println();
-        System.out.println(("-").repeat(50));
-        System.out.println("Report Search:");
+        System.out.println(Colors.GREEN + ("-").repeat(50));
         System.out.println();
-        System.out.println("Please Select what you'll like to Search today");
-        System.out.println(" [1] Month To Date");
-        System.out.println(" [2] Previous Month ");
-        System.out.println(" [3] Year To Date");
-        System.out.println(" [4] Previous Year");
-        System.out.println(" [5] Search by Vendor");
-        System.out.println(" [0] Back");
-        System.out.println(("-").repeat(50));
+        System.out.println("Report Search:" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.PURPLE + "Please Select what you'll like to Search today" + Colors.RESET);
+        System.out.println(" [1] " + Colors.CYAN + "Month To Date" + Colors.RESET);
+        System.out.println(" [2] " + Colors.CYAN + "Previous Month" + Colors.RESET);
+        System.out.println(" [3] " + Colors.CYAN + "Year To Date" + Colors.RESET);
+        System.out.println(" [4] " + Colors.CYAN + "Previous Year" + Colors.RESET);
+        System.out.println(" [5] " + Colors.CYAN + "Search by Vendor" + Colors.RESET);
+        System.out.println(" [0] " + Colors.CYAN + "Back" +  Colors.RESET);
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
 
         try
         {
@@ -388,7 +395,7 @@ public class Main
                         searchByVendor();
                         break;
                     case 0:
-                        report();
+                        ledger();
                         break;
                     default:
                         System.out.println("Invalid Selection");
@@ -409,9 +416,9 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println("Transactions made this month");
+        System.out.println( Colors.RED + "Transactions made this month" + Colors.RESET);
         System.out.println();
         displayHeader();
 
@@ -441,10 +448,10 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
         LocalDate date = LocalDate.now();
-        System.out.println("Transactions made previous month");
+        System.out.println( Colors.RED + "Transactions made previous month" + Colors.RESET);
         System.out.println();
 
 
@@ -478,10 +485,10 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
         LocalDate date = LocalDate.now();
-        System.out.println("Transactions made this Year to Today's Date");
+        System.out.println( Colors.RED + "Transactions made this Year to Today's Date" +  Colors.RESET);
         System.out.println();
 
         LocalDate year = LocalDate.of(date.getYear(), 1, 1);
@@ -511,12 +518,12 @@ public class Main
     private static void userChoiceReport()
     {
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
-        System.out.println("What would you like to do?");
-        System.out.println(" [R] Go to Back to Report ");
-        System.out.println(" [L] Go to Back to Ledger");
-        System.out.print("Select an option: ");
+        System.out.println(Colors.PURPLE + "What would you like to do?"  + Colors.RESET);
+        System.out.println(" [R] " + Colors.CYAN + "Go to Back to Report" + Colors.RESET);
+        System.out.println(" [L] " + Colors.CYAN + "Go to Back to Ledger" + Colors.RESET);
+        System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
         switch(choice)
@@ -542,10 +549,10 @@ public class Main
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
         System.out.println();
-        System.out.println(("-".repeat(50)));
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
         LocalDate date = LocalDate.now();
-        System.out.println("Transactions made previous Year");
+        System.out.println( Colors.RED + "Transactions made previous Year" +  Colors.RESET);
         System.out.println();
 
 
@@ -576,8 +583,8 @@ public class Main
     private static void searchByVendor()
     {
         ArrayList<AccountingLedger> transactions = logger.readLog();
-        System.out.println(("-".repeat(50)));
-        System.out.println("Enter the name of the Vendor");
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
+        System.out.println( Colors.RED + "Enter the name of the Vendor" +  Colors.RESET);
         String vendorName = userInput.nextLine();
         System.out.println();
         displayHeader();
@@ -609,11 +616,11 @@ public class Main
     private static void userSearchChoice()
     {
         System.out.println();
-        System.out.println(("-".repeat(50)));
-        System.out.println("What would you like to do?");
-        System.out.println(" [V] Search another vendor");
-        System.out.println(" [R]  Go to Back to Report");
-        System.out.println(" [L] Go to Back to Ledger Entries");
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
+        System.out.println(Colors.PURPLE + "What would you like to do?" + Colors.RESET);
+        System.out.println(" [V] " + Colors.CYAN + "Search another vendor" + Colors.RESET);
+        System.out.println(" [R] " + Colors.CYAN + "Go to Back to Report" + Colors.RESET);
+        System.out.println(" [L] " + Colors.CYAN + "Go to Back to Ledger Entries" + Colors.RESET);
         String userChoice = userInput.nextLine().strip().toLowerCase();
 
         switch(userChoice)
