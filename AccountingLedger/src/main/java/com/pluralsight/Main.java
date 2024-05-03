@@ -30,10 +30,10 @@ public class Main
         System.out.println("Menu:" );
         System.out.println();
         System.out.println("Please Select The Following:" + Colors.RESET);
-        System.out.println(" [D] " + Colors.CYAN + "Would you like to deposit today?" + Colors.RESET);
-        System.out.println(" [P] " + Colors.CYAN + "Would you like to make a payment today?" + Colors.RESET);
-        System.out.println(" [L] " + Colors.CYAN + "Would you like to view the Ledger?" +  Colors.RESET );
-        System.out.println(" [X] " + Colors.CYAN + "Exit" +  Colors.RESET);
+        System.out.println(Colors.ORANGE + " [D] " + Colors.CYAN + "Would you like to deposit today?" + Colors.RESET);
+        System.out.println(Colors.ORANGE + " [P] " + Colors.CYAN + "Would you like to make a payment today?" + Colors.RESET);
+        System.out.println(Colors.ORANGE + " [L] " + Colors.CYAN + "Would you like to view the Ledger?" +  Colors.RESET );
+        System.out.println(Colors.ORANGE + " [X] " + "Exit" +  Colors.RESET);
         System.out.println(Colors.RED + ("-").repeat(50) + Colors.RESET);
 
 
@@ -106,8 +106,8 @@ public class Main
     {
         System.out.println();
         System.out.println(Colors.PURPLE + "What would you like to do?" + Colors.RESET);
-        System.out.println(" [I] " + Colors.CYAN + "insert another deposit" + Colors.RESET);
-        System.out.println(" [X] " + Colors.CYAN + "Go to the home screen" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [I] " + Colors.CYAN + "insert another deposit" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [X] " + Colors.CYAN + "Go to the home screen" + Colors.RESET);
         System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
@@ -163,8 +163,8 @@ public class Main
     {
         System.out.println();
         System.out.println( Colors.PURPLE + "What would you like to do?" + Colors.RESET);
-        System.out.println(" [I] " + Colors.CYAN + "insert another payment" + Colors.RESET);
-        System.out.println(" [X] " + Colors.CYAN + "Go to the home screen" + Colors.RESET);
+        System.out.println(Colors.ORANGE + " [I] " + Colors.CYAN + "insert another payment" + Colors.RESET);
+        System.out.println(Colors.ORANGE + " [X] " + Colors.CYAN + "Go to the home screen" + Colors.RESET);
         System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
@@ -193,11 +193,11 @@ public class Main
         System.out.println("Entries:");
         System.out.println();
         System.out.println(  "Will you like to view :" + Colors.RESET);
-        System.out.println(" [A] " + Colors.CYAN + "All transactions" + Colors.RESET);
-        System.out.println(" [D] " + Colors.CYAN + "Deposits entries only" + Colors.RESET);
-        System.out.println(" [P] " + Colors.CYAN + "Payments entries only" + Colors.RESET);
-        System.out.println(" [R] " + Colors.CYAN + "Reports" + Colors.RESET);
-        System.out.println(" [H] " + Colors.CYAN + "Home page" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [A] " + Colors.CYAN + "All transactions" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA +" [D] " + Colors.CYAN + "Deposits entries only" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA +" [P] " + Colors.CYAN + "Payments entries only" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA +" [R] " + Colors.CYAN + "Reports" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA +" [H] " +  "Home page" + Colors.RESET);
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
 
         try{
@@ -262,17 +262,25 @@ public class Main
         System.out.println();
         displayHeader();
 
-
-
         Collections.reverse(transactions);
         System.out.println();
 
+
         for (AccountingLedger transaction : transactions)
         {
-
+            System.out.println(Colors.PINK_BACKGROUND);
+            System.out.println(Colors.BLACK);
             System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
-
+            System.out.println(Colors.RESET);
         }
+        System.out.println(Colors.BLUE + "|#######====================#######|\n" +
+                "|#(1)*UNITED STATES OF AMERICA*(1)#|\n" +
+                "|#**          /===\\   ********  **#|\n" +
+                "|*# {G}      | (\") |             #*|\n" +
+                "|#*  ******  | /v\\ |    O N E    *#|\n" +
+                "|#(1)         \\===/            (1)#|\n" +
+                "|##=========ONE DOLLAR===========##|\n" +
+                "------------------------------------" + Colors.RESET);
         userChoice();
 
     }
@@ -293,7 +301,10 @@ public class Main
         {
             if (transaction.getAmount() > 0)
             {
+                System.out.println(Colors.BLUE_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                System.out.println(Colors.RESET);
             }
         }
         userChoice();
@@ -316,11 +327,12 @@ public class Main
         {
             if (transaction.getAmount() < 0)
             {
+                System.out.println(Colors.CYAN_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                System.out.println(Colors.RESET);
             }
         }
-
-        Collections.reverse(transactions);
         userChoice();
     }
 
@@ -330,8 +342,8 @@ public class Main
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println();
         System.out.println(Colors.PURPLE + "What would you like to do?" + Colors.RESET );
-        System.out.println(" [L] " + Colors.CYAN + "Go back to View entries" + Colors.RESET);
-        System.out.println(" [X] " + Colors.CYAN + "Go to the Home page" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [L] " + Colors.CYAN + "Go back to View entries" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [X] " + Colors.CYAN + "Go to the Home page" + Colors.RESET);
         System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
         String choice = userInput.nextLine().strip().toLowerCase();
 
@@ -361,12 +373,12 @@ public class Main
         System.out.println("Report Search:" + Colors.RESET);
         System.out.println();
         System.out.println(Colors.PURPLE + "Please Select what you'll like to Search today" + Colors.RESET);
-        System.out.println(" [1] " + Colors.CYAN + "Month To Date" + Colors.RESET);
-        System.out.println(" [2] " + Colors.CYAN + "Previous Month" + Colors.RESET);
-        System.out.println(" [3] " + Colors.CYAN + "Year To Date" + Colors.RESET);
-        System.out.println(" [4] " + Colors.CYAN + "Previous Year" + Colors.RESET);
-        System.out.println(" [5] " + Colors.CYAN + "Search by Vendor" + Colors.RESET);
-        System.out.println(" [0] " + Colors.CYAN + "Back" +  Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [1] " + Colors.CYAN + "Month To Date" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA  + " [2] " + Colors.CYAN + "Previous Month" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA  + " [3] " + Colors.CYAN + "Year To Date" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA  + " [4] " + Colors.CYAN + "Previous Year" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA  + " [5] " + Colors.CYAN + "Search by Vendor" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA  + " [0] " + Colors.CYAN + "Back" +  Colors.RESET);
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
 
         try
@@ -430,8 +442,10 @@ public class Main
         {
             if (!transaction.getDate().isBefore(start) && !transaction.getDate().isAfter(stop))
             {
-
+                System.out.println(Colors.PURPLE_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                System.out.println(Colors.RESET);
             }
 
         }
@@ -465,13 +479,14 @@ public class Main
         {
             if (!transaction.getDate().isBefore(previousMonthStart) && !transaction.getDate().isAfter(lastDayOfMonth))
             {
-
+                System.out.println(Colors.BLUE_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                System.out.println(Colors.RESET);
             }
 
 
         }
-        Collections.reverse(transactions);
         userChoiceReport();
 
     }
@@ -500,45 +515,15 @@ public class Main
         {
             if (!transaction.getDate().isBefore(year) && !transaction.getDate().isAfter(date))
             {
-
+                System.out.println(Colors.CYAN_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                System.out.println(Colors.RESET);
             }
         }
-        Collections.reverse(transactions);
         userChoiceReport();
 
     }
-
-
-    private static void userChoiceReport()
-    {
-        System.out.println();
-        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
-        System.out.println();
-        System.out.println(Colors.PURPLE + "What would you like to do?"  + Colors.RESET);
-        System.out.println(" [R] " + Colors.CYAN + "Go to Back to Report" + Colors.RESET);
-        System.out.println(" [L] " + Colors.CYAN + "Go to Back to Ledger" + Colors.RESET);
-        System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
-        String choice = userInput.nextLine().strip().toLowerCase();
-
-        switch(choice)
-        {
-            case "r":
-                report();
-                break;
-            case "l":
-                System.out.println("Redirecting to home screen");
-                ledger();
-                break;
-            default:
-                System.out.println("invalid input");
-                userChoiceReport();
-
-        }
-
-    }
-
-
 
     private static void previousYear()
     {
@@ -565,14 +550,43 @@ public class Main
         {
             if (!transaction.getDate().isBefore(previousYear) && !transaction.getDate().isAfter(lastDayOfMonth))
             {
+                System.out.println(Colors.YELLOW_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                System.out.println(Colors.RESET);
             }
 
 
         }
-
-        Collections.reverse(transactions);
         userChoiceReport();
+    }
+
+    private static void userChoiceReport()
+    {
+        System.out.println();
+        System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.PURPLE + "What would you like to do?"  + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [R] " + Colors.CYAN + "Go to Back to Report" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [L] " + Colors.CYAN + "Go to Back to Ledger" + Colors.RESET);
+        System.out.print(Colors.PURPLE + "Select an option: " + Colors.RESET);
+        String choice = userInput.nextLine().strip().toLowerCase();
+
+        switch(choice)
+        {
+            case "r":
+                report();
+                break;
+            case "l":
+                System.out.println("Redirecting to home screen");
+                ledger();
+                break;
+            default:
+                System.out.println("invalid input");
+                userChoiceReport();
+
+        }
+
     }
 
     private static void searchByVendor()
@@ -592,8 +606,11 @@ public class Main
         {
             if (transaction.getVendor().equalsIgnoreCase(vendorName))
             {
+                System.out.println(Colors.LIGHT_PINK_BACKGROUND);
+                System.out.println(Colors.BLACK);
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
                 found = true;
+                System.out.println(Colors.RESET);
             }
 
         }
@@ -602,9 +619,6 @@ public class Main
         if (!found) {
             System.out.println("No transaction found under " + vendorName);
         }
-
-
-        Collections.reverse(transactions);
         userSearchChoice();
     }
 
@@ -613,9 +627,9 @@ public class Main
         System.out.println();
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
         System.out.println(Colors.PURPLE + "What would you like to do?" + Colors.RESET);
-        System.out.println(" [V] " + Colors.CYAN + "Search another vendor" + Colors.RESET);
-        System.out.println(" [R] " + Colors.CYAN + "Go to Back to Report" + Colors.RESET);
-        System.out.println(" [L] " + Colors.CYAN + "Go to Back to Ledger Entries" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [V] " + Colors.CYAN + "Search another vendor" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [R] " + Colors.CYAN + "Go to Back to Report" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA + " [L] " + Colors.CYAN + "Go to Back to Ledger Entries" + Colors.RESET);
         String userChoice = userInput.nextLine().strip().toLowerCase();
 
         switch(userChoice)
