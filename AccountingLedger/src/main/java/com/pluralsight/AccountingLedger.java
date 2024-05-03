@@ -12,8 +12,6 @@ public class AccountingLedger
 
     private LocalDate date ;
     private LocalTime time ;
-
-
     String description;
     String vendor;
     double amount;

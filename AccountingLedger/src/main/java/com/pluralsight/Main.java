@@ -44,7 +44,7 @@ public class Main
 
                 switch (userChoice) {
                     case "d":
-                        makeDeposit();
+                        addDeposit();
                         break;
                     case "p":
                         makePayment();
@@ -68,7 +68,7 @@ public class Main
 
     }
 
-    private static void makeDeposit()
+    private static void addDeposit()
     {
         System.out.println();
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
@@ -96,7 +96,7 @@ public class Main
 
         } catch (NumberFormatException ex) {
             System.out.println("Invalid input only type in the number");
-            makeDeposit();
+            addDeposit();
         }
 
         promptDepositChoice();
@@ -114,7 +114,7 @@ public class Main
         switch(choice)
         {
             case "i":
-                makeDeposit();
+                addDeposit();
                 promptDepositChoice();
                 break;
             case "x":
@@ -273,8 +273,6 @@ public class Main
             System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
 
         }
-
-        Collections.reverse(transactions);
         userChoice();
 
     }
@@ -298,8 +296,6 @@ public class Main
                 System.out.printf("%-15tF %-10tR %-40s %-25s %-20.2f \n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             }
         }
-        Collections.reverse(transactions);
-
         userChoice();
     }
 
@@ -439,7 +435,6 @@ public class Main
             }
 
         }
-        Collections.reverse(transactions);
         userChoiceReport();
 
     }
