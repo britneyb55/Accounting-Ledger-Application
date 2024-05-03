@@ -19,13 +19,13 @@ How to use the  Tracking Financial Footprints:
 
 - Enter L (To view the Ledger)
 The Ledger displays the different types of Entries from all transaction to Only deposit and Payments
-![Home screen](images/ledger.jpeg)
+![Home screen](images/Ledger.jpeg)
 
 - Enter D (To view the Deposit Entries only)
-![Home screen](images/ledgerDesposit.jpeg)
+![Home screen](images/LedgerDesposit.jpeg)
 
 - Enter L (To go back to the entries)
-![Home screen](images/ledgerHome.jpeg)
+![Home screen](images/DLedgerHome.jpeg)
 
 - Enter R (To go into Reports)
 ![Home screen](images/report.jpeg)
@@ -34,10 +34,10 @@ The Ledger displays the different types of Entries from all transaction to Only 
 ![Home screen](images/reportPrevious.jpeg)
 
 - Enter R (To go back to the Report)
-![Home screen](images/ReportHome.jpeg)
+![Home screen](images/ReturnReportHome.jpeg)
 
 - Enter 0 (To go back to Entries)
-![Home screen](images/returnledger.jpeg)
+![Home screen](images/returnLedger.jpeg)
 
 - Enter H (To go to Home)
 ![Home screen](images/returnHome.jpeg)
