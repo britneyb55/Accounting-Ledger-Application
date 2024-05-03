@@ -33,7 +33,7 @@ public class Main
         System.out.println(Colors.ORANGE + " [D] " + Colors.CYAN + "Would you like to deposit today?" + Colors.RESET);
         System.out.println(Colors.ORANGE + " [P] " + Colors.CYAN + "Would you like to make a payment today?" + Colors.RESET);
         System.out.println(Colors.ORANGE + " [L] " + Colors.CYAN + "Would you like to view the Ledger?" +  Colors.RESET );
-        System.out.println(Colors.ORANGE + " [X] " + "Exit" +  Colors.RESET);
+        System.out.println(Colors.ORANGE + " [X] " + Colors.CYAN + "Exit" +  Colors.RESET);
         System.out.println(Colors.RED + ("-").repeat(50) + Colors.RESET);
 
 
@@ -54,7 +54,7 @@ public class Main
                         break;
                     case "x":
                         System.out.println("Have a good day");
-                        break;
+                        return;
                     default:
                         System.out.println("Invalid Selection");
                         homeScreen();
@@ -78,18 +78,20 @@ public class Main
 
         try {
 
-            System.out.println("Enter the amount to deposit");
+            System.out.print("Enter the amount to deposit $");
             double depositAmount = Double.parseDouble(userInput.nextLine().strip());
             System.out.println();
 
-            System.out.println("Enter the Source where the fund are coming (e.g. paycheck, savings, gift)");
+            System.out.println("Enter the description ");
             String depositDescription = userInput.nextLine();
             System.out.println();
 
-            System.out.println("Enter the name of the vendor to who is paying you.");
+            System.out.println("Enter the name of the vendor");
             String vendorDeposit = userInput.nextLine();
             System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
             System.out.println();
+
+            System.out.printf("Deposit of $%.2f is  successfully logged", depositAmount);
 
             logger.logTransactions(depositDescription, vendorDeposit, depositAmount);
 
@@ -99,6 +101,7 @@ public class Main
             addDeposit();
         }
 
+        System.out.println();
         promptDepositChoice();
     }
 
@@ -135,7 +138,7 @@ public class Main
         System.out.println();
 
         try {
-            System.out.println("Enter the payment Amount");
+            System.out.print("Enter the payment Amount $ ");
             double paymentAmount = Double.parseDouble(userInput.nextLine().strip());
             paymentAmount = paymentAmount * -1;
 
@@ -148,6 +151,8 @@ public class Main
             System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
             System.out.println();
 
+            System.out.printf("Payment of $%.2f is  successfully logged", paymentAmount);
+            System.out.println();
             logger.logTransactions(paymentDescription,vendorPayment, paymentAmount);
 
 
@@ -187,9 +192,9 @@ public class Main
     {
         System.out.println();
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
+        System.out.println(Colors.PURPLE + "Ledger" + Colors.RESET);
         System.out.println();
         System.out.println( Colors.PURPLE + "Menu");
-        System.out.println();
         System.out.println("Entries:");
         System.out.println();
         System.out.println(  "Will you like to view :" + Colors.RESET);
@@ -197,7 +202,7 @@ public class Main
         System.out.println(Colors.LIGHT_MAGENTA +" [D] " + Colors.CYAN + "Deposits entries only" + Colors.RESET);
         System.out.println(Colors.LIGHT_MAGENTA +" [P] " + Colors.CYAN + "Payments entries only" + Colors.RESET);
         System.out.println(Colors.LIGHT_MAGENTA +" [R] " + Colors.CYAN + "Reports" + Colors.RESET);
-        System.out.println(Colors.LIGHT_MAGENTA +" [H] " +  "Home page" + Colors.RESET);
+        System.out.println(Colors.LIGHT_MAGENTA +" [H] " + Colors.CYAN +  "Home page" + Colors.RESET);
         System.out.println(Colors.GREEN + ("-").repeat(50) + Colors.RESET);
 
         try{
